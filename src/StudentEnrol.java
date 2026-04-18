@@ -1,4 +1,8 @@
-public class StudentEnrol implements Runnable {
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class StudentEnrol extends Thread {
     private String processID;
     private long burstTime;
     private int priority;
@@ -13,7 +17,6 @@ public StudentEnrol (String processID, long burstTime, int priority) {
     this.burstTime = burstTime;
     this.priority = priority;
     this.remainingTime = burstTime;
-    this.priority = priority;
     }
 
 @Override
@@ -28,6 +31,23 @@ public void run() {
             return;
         }
         endTime = System.currentTimeMillis();
+    }
+}
+
+public static void main(String[] arg) throws IOException {
+    String filePath = "src/StudentEnrolmentData.txt";
+    try ( Scanner scanner = new Scanner (new File(filePath))) {
+        scanner.nextLine();
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(",");
+            String processID = parts[0].trim();
+            long burstTime = Long.parseLong(parts[1].trim());
+            int priority = Integer.parseInt(parts[2].trim());
+
+            StudentEnrol studentEnrol = new StudentEnrol(processID, burstTime, priority);
+            studentEnrol.start();
+        }
     }
 }
 }
