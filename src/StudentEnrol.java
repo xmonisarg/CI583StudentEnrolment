@@ -35,19 +35,23 @@ public void run() {
 }
 
 public static void main(String[] arg) throws IOException {
+// This is the file path to the CSV
     String filePath = "src/StudentEnrolmentData.txt";
+// Try making the scanner for the CSV
     try ( Scanner scanner = new Scanner (new File(filePath))) {
-        scanner.nextLine();
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+// If the scanner has a next line it executes
+if( scanner.hasNextLine()){
+// does a while loop for every line inside of it
+while (scanner.hasNextLine()){
+String line = scanner.nextLine();
             String[] parts = line.split(",");
             String processID = parts[0].trim();
             long burstTime = Long.parseLong(parts[1].trim());
             int priority = Integer.parseInt(parts[2].trim());
-
-            StudentEnrol studentEnrol = new StudentEnrol(processID, burstTime, priority);
+// instantiates a new StudentEnrol Object with the new data
+             StudentEnrol studentEnrol = new StudentEnrol(processID, burstTime, priority);
+// begins the enrolment
             studentEnrol.start();
         }
     }
-}
-}
+}}}
