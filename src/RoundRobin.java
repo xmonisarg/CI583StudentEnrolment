@@ -25,17 +25,20 @@ public class RoundRobin {
         while (!queue.isEmpty()) {
             StudentEnrol process = dequeue();
             Thread.State state = process.getState();
+            // If the process is new, it will begin and then be added to the queue once the quantum time ended.
             if (state == Thread.State.NEW) {
                 process.start();
                 Thread.sleep(Quantum);
                 queue.add(process);
+            // If the process was terminated, it would be added to the front of the queue
             } else if (state == Thread.State.TERMINATED) {
                 completedProcesses.add(process);
-
+                // Output the process ID and the total time taken for the process to complete
                 System.out.println ("Process " + process.getProcessID() + 
                 " completed. Total time: " + 
                 (process.getBurstTime() - process.getTimeTaken()) + " ms");
             }
         }
+        // End the while loop when the queue is empty and return the list of completed processes
             return completedProcesses;
 }};
