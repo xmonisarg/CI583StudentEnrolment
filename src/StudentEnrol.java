@@ -15,6 +15,28 @@ public StudentEnrol (String processID, long burstTime, int priority) {
     this.remainingTime = burstTime;
     }
 
+// Getters for process attributes to be able to functional in RoundRobin
+
+public String getProcessID() {
+    return processID;
+}
+
+public long getBurstTime() {
+    return burstTime;
+}
+
+public long getTimeTaken() {
+    return burstTime - remainingTime;
+}
+
+public long getStartTime() {
+    return startTime;
+}
+
+public long getEndTime() {
+    return endTime;
+}
+
 @Override
 public void run() {
     startTime = System.currentTimeMillis();
@@ -28,4 +50,4 @@ public void run() {
         }
         endTime = System.currentTimeMillis();
     }
-}};
+}
