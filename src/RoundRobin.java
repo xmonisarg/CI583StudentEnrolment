@@ -39,7 +39,3 @@ public class RoundRobin {
                 (process.getBurstTime() - process.getTimeTaken()) + " ms");
             }
         }
-        // End the while loop when the queue is empty and return the list of completed processes
-        return completedProcesses;
-    }
-}
