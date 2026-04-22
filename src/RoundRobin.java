@@ -30,15 +30,16 @@ public class RoundRobin {
                 process.start();
                 Thread.sleep(Quantum);
                 queue.add(process);
-            // If the process was terminated, it would be added to the front of the queue
             } else if (state == Thread.State.TERMINATED) {
+                // If the process was terminated, add it to completed processes
                 completedProcesses.add(process);
-                // Output the process ID and the total time taken for the process to complete
-                System.out.println ("Process " + process.getProcessID() + 
-                " completed. Total time: " + 
+
+                System.out.println("Process " + process.getProcessID() 
+                + " completed. Time taken: " + 
                 (process.getBurstTime() - process.getTimeTaken()) + " ms");
             }
         }
         // End the while loop when the queue is empty and return the list of completed processes
-            return completedProcesses;
-}};
+        return completedProcesses;
+    }
+}
