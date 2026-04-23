@@ -39,3 +39,5 @@ public class RoundRobin {
                 (process.getBurstTime() - process.getTimeTaken()) + " ms");
             }
         }
+        return completedProcesses;
+    }}
