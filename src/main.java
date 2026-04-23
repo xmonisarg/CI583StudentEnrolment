@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Main {  
     // Main to read and create the CSV file parser.
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, InterruptedException {
     Scanner scanner = new Scanner(new File("src/StudentEnrolmentData.txt"));
     List<StudentEnrol> processes = new ArrayList<>();
         while (scanner.hasNextLine()) {
@@ -22,10 +22,22 @@ public class Main {
     for (StudentEnrol process : processes) {
         process.start();
     }
+
+    // round robin the processes
+
+    RoundRobin roundRobin = new RoundRobin();
+    for (StudentEnrol process : processes) {
+        roundRobin.enqueue(process);
+    }
+
+    roundRobin.startEnrolment();
+
     // Priority schedule the processes.
     PrioritySchedule scheduler = new PrioritySchedule();
     for (StudentEnrol process : processes) {
         scheduler.enqueue(process);
     }
-    
+    scheduler.startEnrolment();
+
+    // MLFQ the processes.
 }}; 
