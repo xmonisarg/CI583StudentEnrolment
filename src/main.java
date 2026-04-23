@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main {  
-
+    // Main to read and create the CSV file parser.
   public static void main(String[] args) throws IOException {
     Scanner scanner = new Scanner(new File("src/StudentEnrolmentData.txt"));
     List<StudentEnrol> processes = new ArrayList<>();
@@ -22,4 +22,10 @@ public class Main {
     for (StudentEnrol process : processes) {
         process.start();
     }
+    // Priority schedule the processes.
+    PrioritySchedule scheduler = new PrioritySchedule();
+    for (StudentEnrol process : processes) {
+        scheduler.enqueue(process);
+    }
+    
 }}; 
