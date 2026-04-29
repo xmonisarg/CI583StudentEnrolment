@@ -40,4 +40,11 @@ public class Main {
     scheduler.startEnrolment();
 
     // MLFQ the processes.
+
+    MLFQ mlfq = new MLFQ();
+    for (StudentEnrol process : processes) {
+        mlfq.enqueue(process);
+    }
+
+    mlfq.startEnrolment();
 }}; 
