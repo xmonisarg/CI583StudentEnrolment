@@ -6,6 +6,7 @@ public class MLFQ {
         private ArrayList<StudentEnrol> young = new ArrayList<>();
         private ArrayList<StudentEnrol> old = new ArrayList<>();
         private long Quantum = 20;
+        private boolean fromYoung;
 
         public void enqueue(StudentEnrol process) {
             young.add(process);
@@ -21,27 +22,32 @@ public class MLFQ {
                 } else {
                     process = old.remove(0);
                 }
+    // Using a switch statement to check whether to start, terminate or use a default for the processes and in the appropriate queue method.
                 Thread.State state = process.getState();
-                if (state == Thread.State.NEW) {
-                    process.start();
-                    Thread.sleep(Quantum);
-                    old.add(process);
-                } else if (state == Thread.State.TERMINATED) {
-                    completedProcesses.add(process);
-                    System.out.println("Process " + process.getProcessID() 
-                    + " completed. Time taken: " + 
-                    process.getBurstTime() + "ms " + process.getTimeTaken() + "ms");
-                } else {
-                    // Interrupt if the process was continued if it was not old or new.
-                    process.interrupt();
-                    Thread.sleep(Quantum);
-                    if (young.contains(process)) {
-                        old.add(process);
-                    } else {
-                        young.add(process);
+                switch (state) {
+                    case NEW:
+                        process.start();
+                        Thread.sleep(Quantum);
+                        if (fromYoung) {
+                            old.add(process);
+                        } else {
+                            young.add(process);
+                        break;
+                    case TERMINATED:
+                        completedProcesses.add(process);
+                        System.out.println("Process " + process.getProcessID() + " completed."
+                        + " completed total time:" + process.getBurstTime() + "ms" + process.getTimeTaken + "ms");
+                        break;
+                    default:
+                        process.interrupt();
+                        Thread.sleep(Quantum);
+                        if (fromYoung) {
+                            old.add(process);
+                        } else {
+                            young.add(process);
+                        break;
                     }
                 }
-                
         }
             return completedProcesses;
 
