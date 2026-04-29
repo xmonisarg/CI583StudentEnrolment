@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Main {  
     // Main to read and create the CSV file parser.
   public static void main(String[] args) throws IOException, InterruptedException {
-    Scanner scanner = new Scanner(new File("src/StudentEnrolmentData.txt"));
+    Scanner scanner = new Scanner(new File("src/StudentEnrolmentData.csv"));
     List<StudentEnrol> processes = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
