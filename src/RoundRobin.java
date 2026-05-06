@@ -1,5 +1,3 @@
-package org.example;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +8,7 @@ public class RoundRobin {
     public RoundRobin() {
         this.queue = new ArrayList<>();
     }
-    // Enqueue a process to the back of the queue
+    // Enqueue a process to the back of the queue 
     public void enqueue(StudentEnrol process) {
         queue.add(process);
     }
@@ -36,11 +34,10 @@ public class RoundRobin {
                 // If the process was terminated, add it to completed processes
                 completedProcesses.add(process);
 
-                System.out.println("Process " + process.getProcessID()
-                        + " completed. Time taken: " +
-                        (process.getBurstTime() - process.getTimeTaken()) + " ms");
+                System.out.println("Process " + process.getProcessID() 
+                + " completed. Time taken: " + 
+                (process.getBurstTime() - process.getTimeTaken()) + " ms");
             }
         }
         return completedProcesses;
     }}
-
