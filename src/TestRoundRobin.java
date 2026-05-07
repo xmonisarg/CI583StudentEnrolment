@@ -4,6 +4,8 @@ public class TestRoundRobin {
 
     public static void main(String[] args) throws InterruptedException {
 
+        System.out.println(" -- Round Robin Test --");
+
         RoundRobin rr = new RoundRobin();
 
         StudentEnrol p1 = new StudentEnrol("P1", 1000, 1);

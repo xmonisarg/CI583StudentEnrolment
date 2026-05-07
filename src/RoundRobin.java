@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoundRobin {
+
     private ArrayList<StudentEnrol> queue;
     private long Quantum = 20;
 
